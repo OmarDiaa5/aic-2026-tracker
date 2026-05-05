@@ -6,9 +6,9 @@ Fine-tuned from ViT-Small ImageNet-21K weights (timm).
 
 ## Model Checkpoint
 
-**[INSERT GOOGLE DRIVE / KAGGLE DATASET DIRECT LINK HERE]**
+The model is hosted on Kaggle Models: [omardiaa05/a-eye-model](https://www.kaggle.com/models/omardiaa05/a-eye-model/)
 
-Place the downloaded file at `weights/best_model.pt`.
+During inference via Docker, the `kagglehub` package is used to automatically download the `.pt` file during the container build process. No manual downloading is required.
 
 ## Architecture Summary
 
@@ -27,8 +27,8 @@ Place the downloaded file at `weights/best_model.pt`.
 ## Inference via Docker
 
 ```bash
-# Build the inference Docker image
-docker build --build-arg MODEL_URL="YOUR_DIRECT_LINK" -t aic-tracker .
+# Build the inference Docker image (automatically downloads model from Kaggle)
+docker build -t aic-tracker .
 
 # Run inference (mount dataset and output directory)
 docker run --gpus all \

@@ -9,11 +9,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt kagglehub
 
-# Download model checkpoint from public link
-ARG MODEL_URL
-RUN mkdir -p weights && wget -O weights/best_model.pt "${MODEL_URL}"
+# Download model checkpoint from Kaggle Models
+RUN python -c "import kagglehub, shutil, glob, os; \
+    path = kagglehub.model_download('omardiaa05/a-eye-model/pyTorch/default'); \
+    pt_file = glob.glob(os.path.join(path, '*.pt'))[0]; \
+    os.makedirs('weights', exist_ok=True); \
+    shutil.copy(pt_file, 'weights/best_model.pt')"
 
 COPY . /app
 
