@@ -24,6 +24,15 @@ During inference via Docker, the `kagglehub` package is used to automatically do
 | Params | ~46.5M |
 | Checkpoint | ~89 MB |
 
+## Competition Constraints Verification
+
+| Metric | Maximum Allowed | Our Model | Status |
+|---|---|---|---|
+| **Number of Parameters** | 50 Million | 46.45 Million | ✅ PASS |
+| **Model Size (Disk)** | 0.5 GB (500 MB) | 88.75 MB | ✅ PASS |
+| **Inference Latency** | 30 ms | ~15-22 ms (T4 GPU) | ✅ PASS |
+| **Computational Complexity** | 30 GFLOPs | ~12.5 GFLOPs | ✅ PASS |
+
 ## Inference via Docker
 
 ```bash
